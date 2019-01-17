@@ -1,12 +1,13 @@
 <idea-plugin>
-  <id>com.your.company.unique.plugin.id</id>
-  <name>Plugin display name here</name>
+  <id>com.Paul.plugin.time.tracker</id>
+  <name>Simple time tracker</name>
   <version>1.0</version>
-  <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+  <vendor email="webmoney91rus@yandex.ru" url="http://www.yourcompany.com">Paul</vendor>
 
   <description><![CDATA[
-      Enter short description for your plugin here.<br>
-      <em>most HTML tags may be used</em>
+      <h1> Simple time tracker </h1>
+      <p> That is my simple time tracker with some statistic.
+       You can use it free for time tracking.</p>
     ]]></description>
 
   <change-notes><![CDATA[
@@ -25,7 +26,8 @@
   -->
 
   <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
+    <toolWindow
+      id="Simple time tracker" secondary="true" anchor="right" factoryClass="TimeTrackerToolWindowFactoryClass" />
   </extensions>
 
   <actions>
