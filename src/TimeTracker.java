@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.text.DecimalFormat;
+import java.util.Formatter;
 
 public class TimeTracker {
 
@@ -28,11 +30,16 @@ public class TimeTracker {
         running = false;
     }
 
-    public long getElapsedTime() {
+    public String getElapsedTime() {
         if (running) {
-            return System.currentTimeMillis() - startTime;
+            DecimalFormat elapsedTime = new DecimalFormat("00");
+            long elTime = (System.currentTimeMillis() - startTime) / 1000;
+//            elapsedTime.format("%s2.2:%s2.2:%s2.2", elTime / 3600 % 24, elTime / 60 % 60, elTime % 60);
+            return elapsedTime.format(elTime / 3600 % 24) + ":" +
+                    elapsedTime.format(elTime / 60 % 60) + ":" +
+                    elapsedTime.format(elTime % 60);
         } else {
-            return totalTime;
+            return "00:00:00";
         }
     }
 

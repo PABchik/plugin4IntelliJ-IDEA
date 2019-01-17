@@ -48,7 +48,7 @@ public class TimeTrackerWindow implements Runnable {
         hideB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                time.setText(Long.toString(timeTracker.getElapsedTime()));
+                time.setText(timeTracker.getElapsedTime());
             }
         });
     }
@@ -69,7 +69,7 @@ public class TimeTrackerWindow implements Runnable {
     @Override
     public void run() {
         while (timeTracker.isRunning()) {
-            time.setText(Long.toString(timeTracker.getElapsedTime()));
+            time.setText(timeTracker.getElapsedTime());
         }
     }
 }
