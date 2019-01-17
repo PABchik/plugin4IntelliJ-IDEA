@@ -102,14 +102,14 @@
               <text value="00:00:00"/>
             </properties>
           </component>
-          <component id="56186" class="javax.swing.JTextField" binding="cUsersTimeTrackingLogsTextField" default-binding="true">
+          <component id="56186" class="javax.swing.JTextField" binding="filePath">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
             <properties>
-              <text value="c:\users\TimeTracking\logs.txt"/>
+              <text value="c:\Paul\TimeTrackingLogs.txt"/>
             </properties>
           </component>
         </children>

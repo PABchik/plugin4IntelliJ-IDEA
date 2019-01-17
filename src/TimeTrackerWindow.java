@@ -3,6 +3,9 @@ import com.intellij.openapi.wm.ToolWindow;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Date;
 
 public class TimeTrackerWindow implements Runnable {
 
@@ -15,7 +18,13 @@ public class TimeTrackerWindow implements Runnable {
     private JTextField yourCurrentTaskTextField;
     private JButton hideB;
     private JLabel time;
-    private JTextField cUsersTimeTrackingLogsTextField;
+    private JTextField filePath;
+
+
+    FileWriter writer;
+
+    private Date startDateTime;
+    private Date endDateTime;
 
     private Thread thread;
 
@@ -29,6 +38,7 @@ public class TimeTrackerWindow implements Runnable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!timeTracker.isRunning()) {
+                    startDateTime = new Date();
                     start();
                     timeTracker.startTimeTracking();
                 }
@@ -40,7 +50,19 @@ public class TimeTrackerWindow implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 if (timeTracker.isRunning()) {
                     timeTracker.stopTimeTracking();
+                    endDateTime = new Date();
                     stop();
+                    try {
+                        writer = new FileWriter(filePath.getText(), true);
+                        writer.write("\r\n\r\nStarted at " + startDateTime.toString());
+                        writer.write("\r\nEnded at " + endDateTime.toString());
+                        writer.write("\r\nDuration " + time.getText());
+                        writer.write("\r\nTask name \"" + yourCurrentTaskTextField.getText() + "\"");
+                        writer.close();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+
                 }
             }
 
