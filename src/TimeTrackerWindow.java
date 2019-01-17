@@ -15,6 +15,7 @@ public class TimeTrackerWindow implements Runnable {
     private JTextField yourCurrentTaskTextField;
     private JButton hideB;
     private JLabel time;
+    private JTextField cUsersTimeTrackingLogsTextField;
 
     private Thread thread;
 
