@@ -26,11 +26,11 @@ public class TimeTrackerWindow implements Runnable {
     private Date startDateTime;
     private Date endDateTime;
 
-    private Thread thread;
+    public static Thread thread;
 
     public TimeTrackerWindow(ToolWindow toolWindow) {
 
-
+        thread = new Thread(this);
 
         timeTracker = new TimeTracker(time);
 
@@ -81,7 +81,7 @@ public class TimeTrackerWindow implements Runnable {
     }
 
     public void start() {
-        thread = new Thread(this);
+
         thread.start();
     }
 
