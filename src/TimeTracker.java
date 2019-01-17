@@ -1,26 +1,48 @@
-public class TimeTracker {
+import javax.swing.*;
+
+public class TimeTracker extends Thread{
 
     private long startTime;
     private long stopTime;
     private long totalTime;
-    boolean running = false;
+    JLabel jLabel;
 
-    public void start() {
-        startTime = System.currentTimeMillis();
-        running = true;
+    TimeTracker(JLabel time) {
+        jLabel = time;
     }
 
-    public void stop() {
+    public void startTimeTracking() {
+        startTime = System.currentTimeMillis();
+    }
+
+    public void stopTimeTracking() {
         stopTime = System.currentTimeMillis();
-        running = false;
         totalTime = stopTime - startTime;
     }
 
     public long getElapsedTime() {
-        if (running) {
+        if (isAlive()) {
             return System.currentTimeMillis() - startTime;
         } else {
             return totalTime;
         }
+    }
+
+    public void printElapsedTime(JLabel jLabel) {
+        while (isAlive()) {
+            jLabel.setText(Long.toString(getElapsedTime()));
+            System.out.println("From another thread!");
+        }
+    }
+
+    @Override
+    public void run() {
+        startTimeTracking();
+        printElapsedTime(jLabel);
+    }
+
+    @Override
+    public void interrupt() {
+        stopTimeTracking();
     }
 }
