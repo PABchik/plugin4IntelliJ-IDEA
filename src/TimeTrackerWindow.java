@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TimeTrackerWindow {
+public class TimeTrackerWindow implements Runnable {
 
     private TimeTracker timeTracker;
 
@@ -16,15 +16,20 @@ public class TimeTrackerWindow {
     private JButton hideB;
     private JLabel time;
 
+    private Thread thread;
+
     public TimeTrackerWindow(ToolWindow toolWindow) {
+
+
 
         timeTracker = new TimeTracker(time);
 
         playB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!timeTracker.isAlive()) {
-                    timeTracker.run();
+                if (!timeTracker.isRunning()) {
+                    start();
+                    timeTracker.startTimeTracking();
                 }
             }
         });
@@ -32,14 +37,39 @@ public class TimeTrackerWindow {
         stopB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (timeTracker.isAlive()) {
-                    timeTracker.interrupt();
+                if (timeTracker.isRunning()) {
+                    timeTracker.stopTimeTracking();
+                    stop();
                 }
+            }
+
+        });
+
+        hideB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                time.setText(Long.toString(timeTracker.getElapsedTime()));
             }
         });
     }
 
     public JPanel getContent() {
         return mainPanel;
+    }
+
+    public void start() {
+        thread = new Thread(this);
+        thread.start();
+    }
+
+    public void stop() {
+        thread.interrupt();
+    }
+
+    @Override
+    public void run() {
+        while (timeTracker.isRunning()) {
+            time.setText(Long.toString(timeTracker.getElapsedTime()));
+        }
     }
 }
