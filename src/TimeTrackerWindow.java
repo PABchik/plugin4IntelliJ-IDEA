@@ -18,14 +18,13 @@ public class TimeTrackerWindow {
 
     public TimeTrackerWindow(ToolWindow toolWindow) {
 
-        timeTracker = new TimeTracker();
+        timeTracker = new TimeTracker(time);
 
         playB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!timeTracker.running) {
-                    timeTracker.start();
-                    timeTracker.printElapsedTime();
+                if (!timeTracker.isAlive()) {
+                    timeTracker.run();
                 }
             }
         });
@@ -33,8 +32,8 @@ public class TimeTrackerWindow {
         stopB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (timeTracker.running) {
-                    timeTracker.stop();
+                if (timeTracker.isAlive()) {
+                    timeTracker.interrupt();
                 }
             }
         });
