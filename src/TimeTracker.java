@@ -5,21 +5,23 @@ public class TimeTracker extends Thread{
     private long startTime;
     private long stopTime;
     private long totalTime;
-    boolean running = false;
+    JLabel jLabel;
+
+    TimeTracker(JLabel time) {
+        jLabel = time;
+    }
 
     public void startTimeTracking() {
         startTime = System.currentTimeMillis();
-        running = true;
     }
 
     public void stopTimeTracking() {
         stopTime = System.currentTimeMillis();
-        running = false;
         totalTime = stopTime - startTime;
     }
 
     public long getElapsedTime() {
-        if (running) {
+        if (isAlive()) {
             return System.currentTimeMillis() - startTime;
         } else {
             return totalTime;
@@ -27,14 +29,16 @@ public class TimeTracker extends Thread{
     }
 
     public void printElapsedTime(JLabel jLabel) {
-        while (running) {
+        while (isAlive()) {
             jLabel.setText(Long.toString(getElapsedTime()));
+            System.out.println("From another thread!");
         }
     }
 
     @Override
     public void run() {
         startTimeTracking();
+        printElapsedTime(jLabel);
     }
 
     @Override
