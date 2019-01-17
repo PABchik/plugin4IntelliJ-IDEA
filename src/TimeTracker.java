@@ -16,6 +16,9 @@ public class TimeTracker {
         jLabel = time;
     }
 
+    public void setElapsedTime(long elapsedTime) {
+        this.elapsedTime = elapsedTime;
+    }
 
     public boolean isRunning() {
         return running;

@@ -61,6 +61,7 @@ public class TimeTrackerWindow implements Runnable {
                         writer.write("\r\nDuration " + time.getText());
                         writer.write("\r\nTask name \"" + yourCurrentTaskTextField.getText() + "\"");
                         writer.close();
+                        timeTracker.setElapsedTime(0);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
