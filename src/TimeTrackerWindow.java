@@ -41,6 +41,8 @@ public class TimeTrackerWindow implements Runnable {
                     startDateTime = new Date();
                     start();
                     timeTracker.startTimeTracking();
+                } else if (timeTracker.isPaused()) {
+                    timeTracker.startTimeTracking();
                 }
             }
         });
@@ -66,6 +68,13 @@ public class TimeTrackerWindow implements Runnable {
                 }
             }
 
+        });
+
+        pauseB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                timeTracker.pauseTimeTracking();
+            }
         });
 
         hideB.addActionListener(new ActionListener() {
