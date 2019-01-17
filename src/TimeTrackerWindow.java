@@ -48,7 +48,7 @@ public class TimeTrackerWindow implements Runnable {
         hideB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                time.setText(timeTracker.getElapsedTime());
+                toolWindow.hide(null);
             }
         });
     }
