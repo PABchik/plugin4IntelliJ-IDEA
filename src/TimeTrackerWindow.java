@@ -41,6 +41,8 @@ public class TimeTrackerWindow implements Runnable {
                     startDateTime = new Date();
                     start();
                     timeTracker.startTimeTracking();
+                } else if (timeTracker.isPaused()) {
+                    timeTracker.startTimeTracking();
                 }
             }
         });
@@ -59,6 +61,7 @@ public class TimeTrackerWindow implements Runnable {
                         writer.write("\r\nDuration " + time.getText());
                         writer.write("\r\nTask name \"" + yourCurrentTaskTextField.getText() + "\"");
                         writer.close();
+                        timeTracker.setElapsedTime(0);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
@@ -66,6 +69,13 @@ public class TimeTrackerWindow implements Runnable {
                 }
             }
 
+        });
+
+        pauseB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                timeTracker.pauseTimeTracking();
+            }
         });
 
         hideB.addActionListener(new ActionListener() {
